@@ -1,0 +1,12 @@
+{
+  "vout_5v_voltage_V": {
+    "min": 4.8,
+    "max": 5.2
+  },
+  "load_current_A": {
+    "max": 1.2
+  },
+  "uart_response_received": {
+    "expected": true
+  }
+}

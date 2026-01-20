@@ -1,23 +1,34 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Test Vector Checker</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h2>Test Vector Checker</h2>
+    <div class="container">
+        <h2>Test Vector Checker</h2>
 
-    <label>Spec JSON:</label><br>
-    <input type="file" id="specFile" accept=".json"><br><br>
+        <div class="field">
+            <label>Spec JSON</label>
+            <input type="file" id="specFile" accept=".json">
+        </div>
 
-    <label>Test Vectors JSON:</label><br>
-    <input type="file" id="vectorFile" accept=".json"><br><br>
+        <div class="field">
+            <label>Test Vectors JSON</label>
+            <input type="file" id="vectorFile" accept=".json">
+        </div>
 
-    <button onclick="check()">Check PASS / FAIL</button>
+        <button onclick="check()">Check PASS / FAIL</button>
 
-    <h3>Result</h3>
-    <pre id="output"></pre>
+        <h3>Result</h3>
+        <pre id="output"></pre>
+    </div>
+
 
     <script src="script.js"></script>
 </body>
+
 </html>

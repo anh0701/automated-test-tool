@@ -3,6 +3,8 @@ class TestService:
         self.logger = logger
 
     def run_tests(self, spec: dict, test_vectors: list) -> dict:
+        rules = spec.get("fields", {})
+
         summary = {
             "total": 0,
             "pass": 0,
@@ -10,34 +12,35 @@ class TestService:
         }
 
         for case in test_vectors:
-            summary["total"] += 1
+            case_id = case.get("id")
 
-            case_id = case.get("case_id")
-            signal = case.get("signal")
-            measured = case.get("measured_value")
+            for signal, measured in case.items():
+                if signal == "id":
+                    continue
 
-            rule = spec.get(signal)
+                summary["total"] += 1
+                rule = rules.get(signal)
 
-            if rule is None:
-                self._fail(
-                    case_id,
-                    signal,
-                    measured,
-                    "Signal not found in spec",
-                    summary
-                )
-                continue
+                if rule is None:
+                    self._fail(
+                        case_id,
+                        signal,
+                        measured,
+                        "Signal not found in spec",
+                        summary
+                    )
+                    continue
 
-            if rule["min"] <= measured <= rule["max"]:
-                self._pass(case_id, signal, measured, summary)
-            else:
-                self._fail(
-                    case_id,
-                    signal,
-                    measured,
-                    f"Out of range [{rule['min']}, {rule['max']}]",
-                    summary
-                )
+                if rule["min"] <= measured <= rule["max"]:
+                    self._pass(case_id, signal, measured, summary)
+                else:
+                    self._fail(
+                        case_id,
+                        signal,
+                        measured,
+                        f"Out of range [{rule['min']}, {rule['max']}]",
+                        summary
+                    )
 
         return summary
 

@@ -1,0 +1,5 @@
+timestamp,case_id,signal,measured_value,result,fail_reason
+2026-01-20 18:46:05,TC_01,temperature,25,PASS,
+2026-01-20 18:46:05,TC_01,voltage,3.3,PASS,
+2026-01-20 18:46:05,TC_02,temperature,120,FAIL,"Out of range [0, 100]"
+2026-01-20 18:46:05,TC_02,voltage,3.2,PASS,

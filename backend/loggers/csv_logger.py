@@ -12,7 +12,7 @@ class CsvLogger:
             log_dir, f"test_log_{timestamp}.csv"
         )
 
-        self.file = open(self.file_path, mode="w", newline="")
+        self.file = open(self.file_path, "w", newline="", encoding="utf-8")
         self.writer = csv.writer(self.file)
 
         self.writer.writerow([
@@ -25,16 +25,15 @@ class CsvLogger:
         ])
 
     def log(self, case_id, signal, measured_value, result, fail_reason=""):
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
         self.writer.writerow([
-            timestamp,
+            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             case_id,
             signal,
             measured_value,
             result,
             fail_reason
         ])
+        self.file.flush()
 
     def close(self):
         self.file.close()

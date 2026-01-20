@@ -13,7 +13,7 @@
 
 2. Install Environment
 
-- Language: Python (Standard Library only)
+- Language: Python
 
 - Operating Mode: Offline simulation (no physical DUT)
 

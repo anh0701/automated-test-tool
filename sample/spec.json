@@ -1,0 +1,6 @@
+{
+  "fields": {
+    "temperature": { "min": 0, "max": 100 },
+    "voltage": { "min": 3.0, "max": 3.6 }
+  }
+}

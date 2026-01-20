@@ -1,0 +1,12 @@
+[
+  {
+    "id": "TC_01",
+    "temperature": 25,
+    "voltage": 3.3
+  },
+  {
+    "id": "TC_02",
+    "temperature": 120,
+    "voltage": 3.2
+  }
+]

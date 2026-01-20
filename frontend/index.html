@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test Vector Checker</title>
+</head>
+<body>
+    <h2>Test Vector Checker</h2>
+
+    <label>Spec JSON:</label><br>
+    <input type="file" id="specFile" accept=".json"><br><br>
+
+    <label>Test Vectors JSON:</label><br>
+    <input type="file" id="vectorFile" accept=".json"><br><br>
+
+    <button onclick="check()">Check PASS / FAIL</button>
+
+    <h3>Result</h3>
+    <pre id="output"></pre>
+
+    <script src="script.js"></script>
+</body>
+</html>

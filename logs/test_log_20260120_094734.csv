@@ -1,0 +1,8 @@
+timestamp,case_id,signal,measured_value,result,fail_reason
+2026-01-20 09:47:34,TC_VOUT_5V_VOLTAGE,vout_5v_voltage_V,4.9,PASS,
+2026-01-20 09:47:34,TC_VOUT_5V_VOLTAGE_LOW,vout_5v_voltage_V,4.7,FAIL,Out of range (4.8 ~ 5.2)
+2026-01-20 09:47:34,TC_VOUT_5V_VOLTAGE_HIGH,vout_5v_voltage_V,5.3,FAIL,Out of range (4.8 ~ 5.2)
+2026-01-20 09:47:34,TC_LOAD_CURRENT_NORMAL,load_current_A,1.0,PASS,
+2026-01-20 09:47:34,TC_LOAD_CURRENT_OVER,load_current_A,1.4,FAIL,Out of range (-inf ~ 1.2)
+2026-01-20 09:47:34,TC_COMMUNICATION_OK,uart_response_received,True,PASS,
+2026-01-20 09:47:34,TC_COMMUNICATION_TIMEOUT,uart_response_received,False,FAIL,Unexpected response

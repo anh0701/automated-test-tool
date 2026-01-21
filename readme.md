@@ -27,3 +27,13 @@
 
     - CSV log files stored in the `logs/` directory
 
+3. Backend
+
+- request example
+
+```
+curl -X POST http://127.0.0.1:5000/check \
+  -F "spec=@spec.json" \
+  -F "vectors=@test_vectors.json"
+
+```

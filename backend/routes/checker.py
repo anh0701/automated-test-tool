@@ -2,7 +2,7 @@ import json
 from flask import Blueprint, request, jsonify
 
 from services.test_service import TestService
-from loggers.csv_logger import CsvLogger
+from services.loggers.csv_logger import CsvLogger
 
 checker_bp = Blueprint("checker", __name__)
 

@@ -43,3 +43,7 @@ curl -X POST http://127.0.0.1:5000/check \
 curl -X POST http://localhost:5000/api/analyze \
   -F "log=@logs.csv"
 ```
+
+4. Demo UI
+
+![demo image](demo.png)

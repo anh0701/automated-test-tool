@@ -8,23 +8,43 @@
 </head>
 
 <body>
-    <div class="container">
-        <h2>Checker</h2>
+    <div class="main">
+        <div class="container">
+            <h3>Checker</h3>
+    
+            <div class="field">
+                <label>Spec JSON</label>
+                <input type="file" id="specFile" accept=".json">
+            </div>
+    
+            <div class="field">
+                <label>Test JSON</label>
+                <input type="file" id="vectorFile" accept=".json">
+            </div>
+    
+            <button onclick="check()">Check PASS / FAIL</button>
 
-        <div class="field">
-            <label>Spec JSON</label>
-            <input type="file" id="specFile" accept=".json">
+            <div class="result-section">
+                <h3>Result</h3>
+                <pre id="output"></pre>
+            </div>
         </div>
-
-        <div class="field">
-            <label>Test Vectors JSON</label>
-            <input type="file" id="vectorFile" accept=".json">
+    
+        <div class="container">
+            <h3>Analyze</h3>
+    
+            <div class="field">
+                <label>Log JSON</label>
+                <input type="file" id="log" accept=".csv">
+            </div>
+    
+            <button onclick="analyze()">Check </button>
+            
+            <div class="result-section">
+                <h3>Result</h3>
+                <pre id="output_analyze"></pre>
+            </div>
         </div>
-
-        <button onclick="check()">Check PASS / FAIL</button>
-
-        <h3>Result</h3>
-        <pre id="output"></pre>
     </div>
 
 

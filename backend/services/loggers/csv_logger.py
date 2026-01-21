@@ -20,18 +20,25 @@ class CsvLogger:
             "case_id",
             "signal",
             "measured_value",
+            "expected_low",
+            "expected_high",
             "result",
-            "fail_reason"
+            "fail_reason",
+            "detail"
         ])
 
-    def log(self, case_id, signal, measured_value, result, fail_reason=""):
+    def log(self, case_id, signal, measured_value, expected_low,
+        expected_high, result, fail_reason="", detail=""):
         self.writer.writerow([
             datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             case_id,
             signal,
             measured_value,
+            expected_low,
+            expected_high,
             result,
-            fail_reason
+            fail_reason,
+            detail
         ])
         self.file.flush()
 

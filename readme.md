@@ -47,3 +47,5 @@ curl -X POST http://localhost:5000/api/analyze \
 4. Demo UI
 
 ![demo image](demo.png)
+
+[Video demo project](https://youtu.be/n8ApodyoMy0)

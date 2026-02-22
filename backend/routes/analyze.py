@@ -2,22 +2,18 @@ import csv
 import io
 from services.analyze import detect_flaky, error_distribution, normalize, recommendations, root_cause_summary, signal_health, summary_stats
 from flask import Blueprint, request, jsonify
+from schemas.analyze_schema import validate_analyze_request
 
 analyst_bp = Blueprint("analyze", __name__)
 
 @analyst_bp.route("/api/analyze", methods=["POST"])
 def analyze():
-    if "log" not in request.files:
-        return jsonify({"error": "log CSV file is required"}), 400
+    df, error = validate_analyze_request(request)
 
-    file = request.files["log"]
-    stream = io.StringIO(file.stream.read().decode("utf-8"))
-    logs = list(csv.DictReader(stream))
-
-    if not logs:
-        return jsonify({"error": "Empty log file"}), 400
-
-    logs = normalize(logs)
+    if error:
+        return error
+    
+    logs = normalize(df.to_dict("records"))
 
     signals = signal_health(logs)
     err_dist = error_distribution(logs)

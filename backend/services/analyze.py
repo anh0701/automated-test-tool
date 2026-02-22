@@ -1,6 +1,6 @@
 from collections import defaultdict
 from typing import Counter
-
+import pandas as pd
 
 def normalize(logs):
     for l in logs:
@@ -8,7 +8,8 @@ def normalize(logs):
             if k in l and l[k] not in ("", None):
                 l[k] = float(l[k])
         l["result"] = l["result"].upper()
-        l["fail_reason"] = (l.get("fail_reason") or "").upper()
+        value = l.get("fail_reason")
+        l["fail_reason"] = "" if pd.isna(value) else str(value).upper()
     return logs
 
 def summary_stats(logs):

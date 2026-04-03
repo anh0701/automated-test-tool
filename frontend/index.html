@@ -1,54 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Checker</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Checker Tool</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
+  <div class="app">
+
+    <h1 class="title">⚙️ Checker Tool</h1>
+
     <div class="main">
-        <div class="container">
-            <h3>Checker</h3>
-    
-            <div class="field">
-                <label>Spec file</label>
-                <input type="file" id="specFile" accept=".json">
-            </div>
-    
-            <div class="field">
-                <label>Test file</label>
-                <input type="file" id="vectorFile" accept=".json">
-            </div>
-    
-            <button onclick="check()">Check PASS / FAIL</button>
 
-            <div class="result-section">
-                <h3>Result</h3>
-                <pre id="output"></pre>
-            </div>
+      <!-- CHECKER -->
+      <div class="card">
+        <h2>🧪 Checker</h2>
+
+        <div class="field">
+          <label>Spec file</label>
+          <label class="file-input">
+            <span class="file-text">Click to upload JSON</span>
+            <input type="file" id="specFile" accept=".json">
+          </label>
         </div>
-    
-        <div class="container">
-            <h3>Analyze</h3>
-    
-            <div class="field">
-                <label>Log file</label>
-                <input type="file" id="log" accept=".csv">
-            </div>
-    
-            <button onclick="analyze()">Check </button>
-            
-            <div class="result-section">
-                <h3>Result</h3>
-                <pre id="output_analyze"></pre>
-            </div>
+
+        <div class="field">
+          <label>Test case file</label>
+          <label class="file-input">
+            <span class="file-text">Click to upload JSON</span>
+            <input type="file" id="vectorFile" accept=".json">
+          </label>
         </div>
+
+        <button id="checkBtn" onclick="check()">Check PASS / FAIL</button>
+
+        <div class="result">
+          <div class="result-header">Result</div>
+          <pre id="output"></pre>
+        </div>
+      </div>
+
+      <!-- ANALYZE -->
+      <div class="card">
+        <h2>📊 Analyze</h2>
+
+        <div class="field">
+          <label>Log file</label>
+          <label class="file-input">
+            <span class="file-text">Click to upload CSV</span>
+            <input type="file" id="log" accept=".csv">
+          </label>
+        </div>
+
+        <button id="analyzeBtn" onclick="analyze()">Analyze</button>
+
+        <div class="result">
+          <div class="result-header">Result</div>
+          <pre id="output_analyze"></pre>
+        </div>
+      </div>
+
     </div>
+  </div>
 
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>

@@ -63,7 +63,7 @@ curl -X POST http://localhost:5000/api/analyze \
 
 <!-- [Video demo project](https://youtu.be/n8ApodyoMy0) -->
 
-[![Demo Video](https://img.youtube.com/vi/n8ApodyoMy0/maxresdefault.jpg)](https://youtu.be/n8ApodyoMy0)
+<!-- [![Demo Video](https://img.youtube.com/vi/n8ApodyoMy0/maxresdefault.jpg)](https://youtu.be/n8ApodyoMy0)
+ -->
 
-
-<!-- ![demo image](demo.png) -->
+![demo image](demo.png)

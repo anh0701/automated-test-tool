@@ -13,6 +13,7 @@ def check_vectors():
         return jsonify({
             "error": "spec.json and test_vectors.json are required"
         }), 400
+    
 
     logger = CsvLogger()
     service = TestService(logger)
@@ -20,6 +21,8 @@ def check_vectors():
     try:
         spec = json.load(request.files["spec"])
         vectors = json.load(request.files["vectors"])
+        # print("SPEC TYPE:", type(spec))
+        # print("SPEC DATA:", spec)
     except Exception as e:
         return jsonify({
             "error": f"Invalid JSON: {str(e)}"

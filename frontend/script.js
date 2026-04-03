@@ -41,3 +41,34 @@ async function analyze() {
     document.getElementById("output_analyze").textContent =
         JSON.stringify(data, null, 2);
 }
+
+function setLoading(btn, loading = true, text = "Processing...") {
+  btn.disabled = loading;
+  btn.innerText = loading ? text : btn.dataset.original;
+}
+
+document.querySelectorAll("button").forEach(btn => {
+  btn.dataset.original = btn.innerText;
+});
+
+function setupFileInput(inputId) {
+  const input = document.getElementById(inputId);
+  const label = input.closest(".file-input");
+  const text = label.querySelector(".file-text");
+
+  input.addEventListener("change", () => {
+    if (input.files.length > 0) {
+      const fileName = input.files[0].name;
+
+      text.innerText = fileName;
+      label.classList.add("active");
+    } else {
+      text.innerText = "Click to upload";
+      label.classList.remove("active");
+    }
+  });
+}
+
+setupFileInput("specFile");
+setupFileInput("vectorFile");
+setupFileInput("log");

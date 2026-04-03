@@ -1,45 +1,35 @@
-import json
+from services.loggers.csv_logger import CsvLogger
 from flask import Blueprint, request, jsonify
 
-from services.test_service import TestService
-from services.loggers.csv_logger import CsvLogger
+from services.TestService import TestService
+from services.analyzer import LogAnalyzer
+from config.settings import ROOT_CAUSE_RULES
+
+from schemas.check_schema import validate_check_request
+
 
 checker_bp = Blueprint("checker", __name__)
 
 
 @checker_bp.route("/check", methods=["POST"])
 def check_vectors():
-    if "spec" not in request.files or "vectors" not in request.files:
-        return jsonify({
-            "error": "spec.json and test_vectors.json are required"
-        }), 400
-    
+
+    spec, test_vectors, error = validate_check_request(request)
+    if error:
+        return error
+
 
     logger = CsvLogger()
-    service = TestService(logger)
+    service = TestService(logger=logger)  
+    results = service.run_tests(spec, test_vectors)
 
-    try:
-        spec = json.load(request.files["spec"])
-        vectors = json.load(request.files["vectors"])
-        # print("SPEC TYPE:", type(spec))
-        # print("SPEC DATA:", spec)
-    except Exception as e:
-        return jsonify({
-            "error": f"Invalid JSON: {str(e)}"
-        }), 400
+    # print(type(results), results[:2])
 
-    try:
-        results = service.run_tests(spec, vectors)
-    finally:
-        logger.close()
+    analyzer = LogAnalyzer(results, ROOT_CAUSE_RULES)
 
-    summary = {
-        "total": results["total"],
-        "passed": results["pass"],
-        "failed": results["fail"]
-    }
+    summary = analyzer.summary()
 
     return jsonify({
-        "summary": summary,
-        "log_file": logger.file_path
+        "log_file": logger.file_path,
+        "summary": summary
     })

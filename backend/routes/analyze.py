@@ -1,7 +1,7 @@
-import csv
-import io
-from services.analyze import detect_flaky, error_distribution, normalize, recommendations, root_cause_summary, signal_health, summary_stats
 from flask import Blueprint, request, jsonify
+from config.settings import ROOT_CAUSE_RULES
+from services.analyzer import LogAnalyzer
+from utils.converter import to_test_results
 from schemas.analyze_schema import validate_analyze_request
 
 analyst_bp = Blueprint("analyze", __name__)
@@ -12,19 +12,16 @@ def analyze():
 
     if error:
         return error
-    
-    logs = normalize(df.to_dict("records"))
 
-    signals = signal_health(logs)
-    err_dist = error_distribution(logs)
+    results = to_test_results(df)
+
+    analyzer = LogAnalyzer(results, ROOT_CAUSE_RULES)
 
     report = {
-        "summary": summary_stats(logs),
-        "signals": signals,
-        "error_distribution": err_dist,
-        "flaky_cases": detect_flaky(logs),
-        "root_causes": root_cause_summary(logs),
-        "recommendations": recommendations(signals, err_dist)
+        "summary": analyzer.summary(),
+        "signals": analyzer.signal_health(),
+        "error_distribution": analyzer.error_distribution(),
+        "root_causes": analyzer.root_cause_summary()
     }
 
     return jsonify(report)

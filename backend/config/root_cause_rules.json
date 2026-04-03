@@ -1,0 +1,7 @@
+{
+  "OUT_OF_RANGE_LOW": "Possible undervoltage or calibration drift",
+  "OUT_OF_RANGE_HIGH": "Possible overvoltage or reference error",
+  "UNSTABLE": "Noise or timing issue",
+  "TIMEOUT": "Communication or response latency issue",
+  "NO_SIGNAL": "Connection or enable sequence issue"
+}

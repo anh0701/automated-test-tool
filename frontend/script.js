@@ -64,9 +64,10 @@ function renderCheckResult(data) {
 
   const failRate = summary.fail_rate || 0;
 
+  // 0.75 = 75%
   const passRate =
     total > 0
-      ? (pass / total) * 100
+      ? pass / total
       : 0;
 
   document.getElementById("checkTotal").textContent =
@@ -85,12 +86,11 @@ function renderCheckResult(data) {
     formatPercent(passRate);
 
   document.getElementById("passProgress").style.width =
-    `${passRate}%`;
+    `${passRate * 100}%`;
 
   document.getElementById("failProgress").style.width =
-    `${100 - passRate}%`;
+    `${(1 - passRate) * 100}%`;
 
-  // Generated log file
   document.getElementById("generatedLogFile").textContent =
     data.log_file || "No log file generated";
 
@@ -107,7 +107,6 @@ function renderCheckResult(data) {
 
   show("checkerResult");
 }
-
 
 async function analyze() {
   const log = document.getElementById("log").files[0];

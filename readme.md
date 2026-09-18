@@ -65,8 +65,4 @@ curl -X POST http://localhost:5000/api/analyze \
 
 - Video
 
-[![Demo Video](https://img.youtube.com/vi/Uka86UzjxEk/maxresdefault.jpg)](https://youtu.be/Uka86UzjxEk)
-
-- Image
-
-![demo image](demo.png)
+[![Demo Video](https://img.youtube.com/vi/tg5E1iwh6nQ/maxresdefault.jpg)](https://youtu.be/tg5E1iwh6nQ?si=ILgovMxNOv9p6RQq)

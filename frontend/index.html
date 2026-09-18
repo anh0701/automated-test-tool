@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checker Tool</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -11,62 +12,289 @@
 
   <div class="app">
 
-    <h1 class="title">⚙️ Checker Tool</h1>
+    <header class="app-header">
+      <div>
+        <div class="eyebrow">TESTING TOOL</div>
+        <h1>Checker Tool</h1>
+        <p>Validate test vectors and analyze test logs.</p>
+      </div>
 
-    <div class="main">
+      <div class="status">
+        <span class="status-dot"></span>
+        Local API
+      </div>
+    </header>
+
+    <main class="main">
 
       <!-- CHECKER -->
-      <div class="card">
-        <h2>🧪 Checker</h2>
+      <section class="card">
 
-        <div class="field">
-          <label>Spec file</label>
-          <label class="file-input">
-            <span class="file-text">Click to upload JSON</span>
-            <input type="file" id="specFile" accept=".json">
-          </label>
+        <div class="card-header">
+          <div>
+            <div class="section-label">01</div>
+            <h2>Checker</h2>
+            <p>Check test vectors against the specification.</p>
+          </div>
         </div>
 
-        <div class="field">
-          <label>Test case file</label>
-          <label class="file-input">
-            <span class="file-text">Click to upload JSON</span>
-            <input type="file" id="vectorFile" accept=".json">
-          </label>
+        <div class="upload-grid">
+
+          <div class="field">
+            <label>Spec file</label>
+
+            <label class="file-input">
+              <span class="file-icon">↑</span>
+
+              <span class="file-info">
+                <span class="file-text">Click to upload JSON</span>
+                <span class="file-hint">Specification file</span>
+              </span>
+
+              <input type="file" id="specFile" accept=".json">
+            </label>
+          </div>
+
+          <div class="field">
+            <label>Test case file</label>
+
+            <label class="file-input">
+              <span class="file-icon">↑</span>
+
+              <span class="file-info">
+                <span class="file-text">Click to upload JSON</span>
+                <span class="file-hint">Test vector file</span>
+              </span>
+
+              <input type="file" id="vectorFile" accept=".json">
+            </label>
+          </div>
+
         </div>
 
-        <button id="checkBtn" onclick="check()">Check PASS / FAIL</button>
+        <button id="checkBtn" onclick="check()">
+          Check PASS / FAIL
+        </button>
 
-        <div class="result">
-          <div class="result-header">Result</div>
-          <pre id="output"></pre>
+        <div id="checkerResult" class="result hidden">
+
+          <div class="result-title">
+            <div>
+              <span class="result-label">CHECK RESULT</span>
+              <h3>Test Summary</h3>
+            </div>
+
+            <span id="checkerStatus" class="result-status"></span>
+          </div>
+
+          <div class="generated-log">
+            <div class="generated-log-label">
+              GENERATED LOG FILE
+            </div>
+
+            <div class="generated-log-content">
+              <span id="generatedLogFile">
+                -
+              </span>
+            </div>
+          </div>
+
+          <div class="summary-grid">
+
+            <div class="summary-card">
+              <span>Total Tests</span>
+              <strong id="checkTotal">0</strong>
+            </div>
+
+            <div class="summary-card pass">
+              <span>Passed</span>
+              <strong id="checkPass">0</strong>
+            </div>
+
+            <div class="summary-card fail">
+              <span>Failed</span>
+              <strong id="checkFail">0</strong>
+            </div>
+
+            <div class="summary-card">
+              <span>Fail Rate</span>
+              <strong id="checkFailRate">0%</strong>
+            </div>
+
+          </div>
+
+          <div class="progress-section">
+
+            <div class="progress-header">
+              <span>Test result</span>
+
+              <span>
+                <span id="passPercent">0%</span> passed
+              </span>
+            </div>
+
+            <div class="progress">
+              <div id="passProgress" class="progress-pass"></div>
+              <div id="failProgress" class="progress-fail"></div>
+            </div>
+
+            <div class="legend">
+              <span>
+                <i class="dot pass-dot"></i>
+                PASS
+              </span>
+
+              <span>
+                <i class="dot fail-dot"></i>
+                FAIL
+              </span>
+            </div>
+
+          </div>
+
         </div>
-      </div>
+
+        <div id="checkError" class="error-message hidden"></div>
+
+      </section>
+
 
       <!-- ANALYZE -->
-      <div class="card">
-        <h2>📊 Analyze</h2>
+      <section class="card">
+
+        <div class="card-header">
+          <div>
+            <div class="section-label">02</div>
+            <h2>Analyze</h2>
+            <p>Analyze test logs and identify possible root causes.</p>
+          </div>
+        </div>
 
         <div class="field">
+
           <label>Log file</label>
+
           <label class="file-input">
-            <span class="file-text">Click to upload CSV</span>
+            <span class="file-icon">↑</span>
+
+            <span class="file-info">
+              <span class="file-text">Click to upload CSV</span>
+              <span class="file-hint">Test execution log</span>
+            </span>
+
             <input type="file" id="log" accept=".csv">
           </label>
+
         </div>
 
-        <button id="analyzeBtn" onclick="analyze()">Analyze</button>
+        <button id="analyzeBtn" onclick="analyze()">
+          Analyze Log
+        </button>
 
-        <div class="result">
-          <div class="result-header">Result</div>
-          <pre id="output_analyze"></pre>
+        <div id="analyzeResult" class="result hidden">
+
+          <div class="result-title">
+            <div>
+              <span class="result-label">LOG ANALYSIS</span>
+              <h3>Test Summary</h3>
+            </div>
+          </div>
+
+          <div class="summary-grid">
+
+            <div class="summary-card">
+              <span>Total Tests</span>
+              <strong id="analyzeTotal">0</strong>
+            </div>
+
+            <div class="summary-card pass">
+              <span>Passed</span>
+              <strong id="analyzePass">0</strong>
+            </div>
+
+            <div class="summary-card fail">
+              <span>Failed</span>
+              <strong id="analyzeFail">0</strong>
+            </div>
+
+            <div class="summary-card">
+              <span>Fail Rate</span>
+              <strong id="analyzeFailRate">0%</strong>
+            </div>
+
+          </div>
+
+
+          <!-- SIGNALS -->
+          <div class="analysis-section">
+
+            <div class="analysis-header">
+              <h3>Signal Analysis</h3>
+              <span>Failure rate by signal</span>
+            </div>
+
+            <div class="table-wrapper">
+
+              <table>
+
+                <thead>
+                  <tr>
+                    <th>Signal</th>
+                    <th>Fail Rate</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+
+                <tbody id="signalTable"></tbody>
+
+              </table>
+
+            </div>
+
+          </div>
+
+
+          <!-- ERROR DISTRIBUTION -->
+          <div class="analysis-section">
+
+            <div class="analysis-header">
+              <h3>Error Distribution</h3>
+              <span>Detected failure types</span>
+            </div>
+
+            <div id="errorDistribution" class="error-list"></div>
+
+          </div>
+
+
+          <!-- ROOT CAUSES -->
+          <div class="analysis-section">
+
+            <div class="analysis-header">
+              <h3>Failure Analysis</h3>
+              <span>Possible root causes</span>
+            </div>
+
+            <div id="rootCauseList"></div>
+
+          </div>
+
         </div>
-      </div>
 
-    </div>
+        <div id="analyzeError" class="error-message hidden"></div>
+
+      </section>
+
+    </main>
+
+    <footer>
+      Checker Tool - Local Test Analysis
+    </footer>
+
   </div>
 
   <script src="script.js"></script>
+
 </body>
 
 </html>

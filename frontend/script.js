@@ -457,6 +457,7 @@ function setupDragAndDrop(inputId) {
 
   dropZone.addEventListener("dragover", (event) => {
     event.preventDefault();
+
     dropZone.classList.add("drag-over");
   });
 
@@ -466,28 +467,38 @@ function setupDragAndDrop(inputId) {
 
   dropZone.addEventListener("drop", (event) => {
     event.preventDefault();
+
     dropZone.classList.remove("drag-over");
 
     const files = event.dataTransfer.files;
 
-    if (!files || files.length === 0) return;
+    if (!files || files.length === 0) {
+      return;
+    }
 
     input.files = files;
 
-    // Cập nhật tên file trên UI
-    const fileText = dropZone.querySelector(".file-text");
+    const fileText =
+      dropZone.querySelector(".file-text");
 
     if (fileText) {
       fileText.textContent = files[0].name;
     }
+
+    dropZone.classList.add("active");
   });
 
-  // Khi click chọn file bình thường
   input.addEventListener("change", () => {
-    const fileText = dropZone.querySelector(".file-text");
+    if (input.files.length > 0) {
+      const fileText =
+        dropZone.querySelector(".file-text");
 
-    if (fileText && input.files.length > 0) {
-      fileText.textContent = input.files[0].name;
+      if (fileText) {
+        fileText.textContent =
+          input.files[0].name;
+      }
+
+      dropZone.classList.add("active");
     }
   });
 }

@@ -171,7 +171,17 @@ body {
 
 .file-input.active {
   border-style: solid;
-  border-color: #2563eb;
+  border-color: #3b82f6;
+  background: rgba(37, 99, 235, 0.08);
+}
+
+.file-input.active .file-icon {
+  color: #93c5fd;
+  background: rgba(37, 99, 235, 0.18);
+}
+
+.file-input.active .file-text {
+  color: #93c5fd;
 }
 
 .file-input input {
